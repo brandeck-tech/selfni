@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api'\;
+
 const api = axios.create({
-  baseURL: 'http://localhost:4000/api',
+  baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -30,11 +32,9 @@ export const groups = {
   payRound: (memberId: number) => api.patch(`/groups/members/${memberId}/pay`),
 };
 
-export default api;
-
 export const downloadPDF = async () => {
   const token = localStorage.getItem('token');
-  const res = await fetch('http://localhost:4000/api/pdf/report', {
+  const res = await fetch(`${BASE_URL.replace('/api', '')}/api/pdf/report`, {
     headers: { 'Authorization': `Bearer ${token}` }
   });
   const blob = await res.blob();
@@ -45,3 +45,5 @@ export const downloadPDF = async () => {
   a.click();
   window.URL.revokeObjectURL(url);
 };
+
+export default api;
