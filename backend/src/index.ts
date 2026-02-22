@@ -9,6 +9,7 @@ import debtsRoutes from './routes/debts.routes';
 import groupsRoutes from './routes/groups.routes';
 import sharesRoutes from './routes/shares.routes';
 import pdfRoutes from './routes/pdf.routes';
+import remindersRoutes from './routes/reminders.routes';
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use('/api/debts', debtsRoutes);
 app.use('/api/groups', groupsRoutes);
 app.use('/api/shares', sharesRoutes);
 app.use('/api/pdf', pdfRoutes);
+app.use('/api/reminders', remindersRoutes);
 
 app.get('/health', (_req: Request, res: Response) => {
   res.json({ status: 'success', message: '🚀 سلفني شغال!' });

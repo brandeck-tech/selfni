@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { debts, downloadPDF } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import Reminders from '../components/Reminders';
 
 export default function Home({ setPage }: { setPage: (p: string) => void }) {
   const { user, logout } = useAuth();
@@ -60,6 +61,7 @@ export default function Home({ setPage }: { setPage: (p: string) => void }) {
       </div>
 
       {/* Debts List */}
+      <Reminders />
       <div style={{ padding:'0 1.5rem' }}>
         {loading ? <p style={{ color:'#94a3b8', textAlign:'center' }}>جاري التحميل...</p> :
           data.debts.length === 0 ? <p style={{ color:'#94a3b8', textAlign:'center' }}>مفيش ديون دلوقتي 🎉</p> :
