@@ -1,49 +1,51 @@
-import axios from 'axios';
+// ===== API Service =====
+const BASE = 'http://localhost:3003/api';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api'\;
-
-const api = axios.create({
-  baseURL: BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
+const headers = () => ({
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
 });
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-});
+export const api = {
+  get: (endpoint: string) =>
+    fetch(`${BASE}${endpoint}`, { headers: headers() }).then(r => r.json()),
 
-export const auth = {
-  register: (data: any) => api.post('/auth/register', data),
-  login: (data: any) => api.post('/auth/login', data),
+  post: (endpoint: string, body: any) =>
+    fetch(`${BASE}${endpoint}`, { method: 'POST', headers: headers(), body: JSON.stringify(body) }).then(r => r.json()),
+
+  patch: (endpoint: string, body?: any) =>
+    fetch(`${BASE}${endpoint}`, { method: 'PATCH', headers: headers(), body: body ? JSON.stringify(body) : undefined }).then(r => r.json()),
+
+  delete: (endpoint: string) =>
+    fetch(`${BASE}${endpoint}`, { method: 'DELETE', headers: headers() }).then(r => r.json()),
 };
 
-export const debts = {
+// ===== Debt API =====
+export const debtApi = {
   getAll: () => api.get('/debts'),
-  add: (data: any) => api.post('/debts', data),
+  getById: (id: number) => api.get(`/debts/${id}`),
+  create: (data: any) => api.post('/debts', data),
   markPaid: (id: number) => api.patch(`/debts/${id}/pay`),
-  delete: (id: number) => api.delete(`/debts/${id}`),
-  share: (id: number) => api.post(`/shares/debt/${id}`),
+  getPayments: (id: number) => api.get(`/debts/${id}/payments`),
+  addPayment: (id: number, data: any) => api.post(`/debts/${id}/payments`, data),
 };
 
-export const groups = {
-  getAll: () => api.get('/groups'),
-  create: (data: any) => api.post('/groups', data),
-  payRound: (memberId: number) => api.patch(`/groups/members/${memberId}/pay`),
+// ===== Customer API =====
+export const customerApi = {
+  getAll: () => api.get('/customers'),
+  create: (data: any) => api.post('/customers', data),
+  getRisk: () => api.get('/risk/clients'),
 };
 
-export const downloadPDF = async () => {
-  const token = localStorage.getItem('token');
-  const res = await fetch(`${BASE_URL.replace('/api', '')}/api/pdf/report`, {
-    headers: { 'Authorization': `Bearer ${token}` }
-  });
-  const blob = await res.blob();
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'selfni-report.pdf';
-  a.click();
-  window.URL.revokeObjectURL(url);
+// ===== Installment API =====
+export const installmentApi = {
+  getByDebt: (debtId: number) => api.get(`/installments/debt/${debtId}`),
+  create: (debtId: number, data: any) => api.post(`/installments/debt/${debtId}`, data),
+  pay: (id: number) => api.patch(`/installments/${id}/pay`),
 };
 
-export default api;
+// ===== Auth API =====
+export const authApi = {
+  login: (email: string, password: string) => api.post('/auth/login', { email, password }),
+  register: (data: any) => api.post('/auth/register', data),
+};

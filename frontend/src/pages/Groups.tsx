@@ -96,7 +96,7 @@ export default function Groups({ setPage }: { setPage: (p: string) => void }) {
 
       {/* Bottom Nav */}
       <div style={{ position:'fixed', bottom:0, left:0, right:0, background:'#1e293b', display:'flex', borderTop:'1px solid #334155' }}>
-        {[['🏠','الرئيسية','home'],['➕','دين جديد','add'],['👥','جمعيات','groups']].map(([icon, label, page]) => (
+        {[['🏠','الرئيسية','home'],['➕','دين جديد','add'],['👥','العملاء','clients'],['📊','إحصائيات','dashboard'],['⚙️','إعدادات','settings']].map(([icon, label, page]) => (
           <button key={page} onClick={() => setPage(page)}
             style={{ flex:1, padding:'0.75rem', background:'transparent', border:'none', color: page === 'groups' ? '#38bdf8' : '#94a3b8', cursor:'pointer', fontSize:'0.8rem' }}>
             <div style={{ fontSize:'1.2rem' }}>{icon}</div>{label}

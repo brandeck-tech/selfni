@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { query } from '../database/config/connection';
+import { query } from '../config/connection';
 import { AuthRequest } from '../middleware/auth.middleware';
 
 export const getGroups = async (req: AuthRequest, res: Response) => {
