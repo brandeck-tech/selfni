@@ -69,3 +69,35 @@ bash start.sh
 
 سلفني – مستقبل التعاملات المالية بين الأفراد والتجار
 
+
+
+# Selfni
+
+## Overview
+Selfni is an innovative digital platform for managing debts and financial associations between individuals and merchants. The platform transforms traditional and informal financial transactions into a secure, transparent, and easy-to-use digital experience, enhancing trust and financial inclusion within communities.
+
+## Vision
+Empowering individuals and merchants to manage their financial commitments in an organized and reliable way, while providing innovative solutions for informal financial practices such as debts and rotating savings groups.
+
+## Mission
+To build a modern digital system that strengthens trust between parties, reduces risks associated with traditional financial transactions, and provides smart tools for debt management, payment tracking, and organizing monthly associations.
+
+## Key Features
+- Debt management and tracking  
+- Digital organization of rotating savings groups  
+- Documentation and transparency of all transactions  
+- Notifications and reminders for payments  
+- Financial reports and summaries  
+
+## Value for Investors
+- Opening new markets in FinTech serving millions who rely on debts and associations  
+- Promoting financial inclusion in emerging communities  
+- Building strong data foundations for future services such as credit scoring and microfinance  
+
+## Expected Impact
+- Reduce financial disputes between individuals and merchants  
+- Support local economies by enhancing trust in informal transactions  
+- Attract wide segments of society towards modern digital solutions  
+
+---
+**Selfni – The Future of Financial Transactions**
